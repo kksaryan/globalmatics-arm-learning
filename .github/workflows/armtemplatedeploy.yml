@@ -38,6 +38,7 @@ jobs:
 
       - name: Create storage account
         uses: azure/arm-deploy@v1
+        id: storageDeployed
         with:
           scope: resourcegroup
           resourceGroupName: rg-githubactions
@@ -48,3 +49,5 @@ jobs:
             location="West India"
           template: ./arm-templates/storageaccount.json
           deploymentMode: Complete
+
+      - run: echo ${{ steps.storageDeployed.outputs.blobURI}}
