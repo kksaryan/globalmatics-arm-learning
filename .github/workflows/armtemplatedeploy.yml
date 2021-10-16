@@ -32,3 +32,14 @@ jobs:
           subscriptionId: 615d1e7e-a44b-4606-a534-fdd1045ffa68
           region: Central India
           template: ./arm-templates/resourcegroup.json
+
+      - name: Create storage account
+        uses: azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: rg-githubactions
+          #subscriptionId: 615d1e7e-a44b-4606-a534-fdd1045ffa68
+          #region: Central India
+          parameters: ./arm-templates/storageaccount.parameters.json
+          template: ./arm-templates/storageaccount.json
+          deploymentMode: Incremental
