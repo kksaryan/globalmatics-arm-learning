@@ -56,5 +56,6 @@ jobs:
           scope: resourcegroup
           resourceGroupName: rg-githubactions
           parameters: adminPassword=kksoni@198
+            location="East US"
           template: ./arm-templates/vm.json
           deploymentMode: Complete
