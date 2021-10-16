@@ -50,4 +50,11 @@ jobs:
           template: ./arm-templates/storageaccount.json
           deploymentMode: Complete
 
-      - run: echo ${{ steps.storageDeployed.outputs.blobURI}}
+      - name: Create virtual machine
+        uses: azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: rg-githubactions
+          parameters: adminPassword=kksoni@198
+          template: ./arm-templates/vm.json
+          deploymentMode: Complete
