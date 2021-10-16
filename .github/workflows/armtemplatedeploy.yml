@@ -6,7 +6,7 @@ name: armTemplateDeploy
 on:
   push:
     branches:
-        - main
+      - main
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -24,9 +24,9 @@ jobs:
         uses: Azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      
+
       - name: Provision new resource group
-        uses: Azure/cli@1.0.4
+        uses: Azure/cli@v1
         with:
           inlineScript: |
             az deployment sub create --location "Central India" --template-file ./arm-templates/resourcegroup.json
