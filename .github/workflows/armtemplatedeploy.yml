@@ -25,16 +25,16 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Provision new resource group
-        uses: azure/arm-deploy@v1
-        with:
-          scope: subscription
-          subscriptionId: 615d1e7e-a44b-4606-a534-fdd1045ffa68
-          region: Central India
-          parameters: location="Central India"
-            resourceGroupName=rg-githubactions
-          template: ./arm-templates/resourcegroup.json
-          deploymentMode: Complete
+      # - name: Provision new resource group
+      #   uses: azure/arm-deploy@v1
+      #   with:
+      #     scope: subscription
+      #     subscriptionId: 615d1e7e-a44b-4606-a534-fdd1045ffa68
+      #     region: Central India
+      #     parameters: location="Central India"
+      #       resourceGroupName=rg-githubactions
+      #     template: ./arm-templates/resourcegroup.json
+      #     deploymentMode: Complete
 
       # - name: Create storage account
       #   uses: azure/arm-deploy@v1
