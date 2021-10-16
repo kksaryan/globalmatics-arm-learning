@@ -10,7 +10,7 @@
             "defaultValue":"Central India"
             
         },
-        "resourceGroupName": {
+        "resGroupName": {
             "type": "string",
             "metadata": {
                 "description": "Enter resource group name"
@@ -22,7 +22,7 @@
     "variables": {},
     "resources": [
         {
-            "name": "[parameters('resourceGroupName')]",
+            "name": "[parameters('resGroupName')]",
             "type": "Microsoft.Resources/resourceGroups",
             "apiVersion": "2021-05-01",
             "location": "[parameters('location')]",
