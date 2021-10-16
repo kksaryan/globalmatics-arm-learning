@@ -34,6 +34,7 @@ jobs:
           parameters: location="West India"
             resourceGroupName=rg-githubactions
           template: ./arm-templates/resourcegroup.json
+          deploymentMode: Complete
 
       - name: Create storage account
         uses: azure/arm-deploy@v1
