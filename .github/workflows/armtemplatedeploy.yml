@@ -31,7 +31,7 @@ jobs:
           scope: subscription
           subscriptionId: 615d1e7e-a44b-4606-a534-fdd1045ffa68
           region: Central India
-          parameters: location="West India"
+          parameters: location="Central India"
             resourceGroupName=rg-githubactions
           template: ./arm-templates/resourcegroup.json
           deploymentMode: Complete
