@@ -31,6 +31,8 @@ jobs:
           scope: subscription
           subscriptionId: 615d1e7e-a44b-4606-a534-fdd1045ffa68
           region: Central India
+          parameters: location="West India"
+            resourceGroupName=rg-githubactions
           template: ./arm-templates/resourcegroup.json
 
       - name: Create storage account
@@ -40,8 +42,8 @@ jobs:
           resourceGroupName: rg-githubactions
           #subscriptionId: 615d1e7e-a44b-4606-a534-fdd1045ffa68
           #region: Central India
-          parameters: ./arm-templates/storageaccount.parameters.json
+          parameters: sku=Standard_LRS
             storageAccountName=kksoni1982
             location="West India"
           template: ./arm-templates/storageaccount.json
-          deploymentMode: Incremental
+          deploymentMode: Complete
