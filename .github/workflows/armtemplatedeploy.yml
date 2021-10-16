@@ -40,6 +40,9 @@ jobs:
           resourceGroupName: rg-githubactions
           #subscriptionId: 615d1e7e-a44b-4606-a534-fdd1045ffa68
           #region: Central India
-          parameters: ./arm-templates/storageaccount.parameters.json
+          parameters: 
+            ./arm-templates/storageaccount.parameters.json
+            storageAccountName: kksoni1982
+            location: West India
           template: ./arm-templates/storageaccount.json
           deploymentMode: Incremental
