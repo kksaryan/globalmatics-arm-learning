@@ -32,7 +32,8 @@ jobs:
       - name: Azure CLI Action to delete ${{ env.resource-group }}
         uses: Azure/cli@1.0.4
         with:
-          inlineScript: az group delete -n ${{ env.resource-group }}
+          inlineScript: |
+            az group delete --name ${{ env.resource-group }} --subscription ${{ env.subscription-id }}
 
       - name: Getting Secrets from Key Vaults
         uses: Azure/get-keyvault-secrets@v1
