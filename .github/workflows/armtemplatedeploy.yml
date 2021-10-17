@@ -54,7 +54,7 @@ jobs:
           with:
             keyvault: "abcKeyVaults"
             secrets: 'adminPassword'
-          id: myGetSecretAction
+        id: myGetSecretAction
         
       - name: Create virtual machine
         uses: azure/arm-deploy@v1
