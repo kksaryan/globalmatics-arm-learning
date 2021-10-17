@@ -52,6 +52,8 @@ jobs:
       - name: Getting Secrets from Key Vaults
         uses: Azure/get-keyvault-secrets@v1
         with:
+          scope: resourcegroup
+          resourceGroupName: rg-githubactions
           keyvault: "abcKeyVaults"
           secrets: "adminPassword"
         id: myGetSecretAction
