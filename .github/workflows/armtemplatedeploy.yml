@@ -16,14 +16,13 @@ jobs:
   armDeployStaging:
     name: Staging deployment
     runs-on: ubuntu-latest
-  environment:
-    name: staging
-
-  env:
-    resource-group: rg-stg-kktest
-    location: eastus2
-    domain: kksoni-stg
-    storage: kksoni-stg-storage
+    environment:
+      name: staging
+    env:
+      resource-group: rg-stg-kktest
+      location: eastus2
+      domain: kksoni-stg
+      storage: kksoni-stg-storage
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -74,20 +73,18 @@ jobs:
             location=${{ env.location }}
             domainName=${{ env.domain }}
           template: ./arm-templates/vm.json
-  
+
   armDeployProduction:
     name: Production deployment
     runs-on: ubuntu-latest
     needs: armDeployStaging
-    
-  environment:
-    name: production
-    
-  env:
-    resource-group: rg-prod-kktest
-    location: eastus2
-    domain: kksoni-prod
-    storage: kksoni-prod-storage
+    environment:
+      name: production
+    env:
+      resource-group: rg-prod-kktest
+      location: eastus2
+      domain: kksoni-prod
+      storage: kksoni-prod-storage
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -138,4 +135,3 @@ jobs:
             location=${{ env.location }}
             domainName=${{ env.domain }}
           template: ./arm-templates/vm.json
-
