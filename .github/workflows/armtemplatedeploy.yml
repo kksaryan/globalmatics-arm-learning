@@ -9,7 +9,7 @@ on:
       - main
 env:
   resource-group: rg-githubactions
-  location: "eastus1"
+  location: "eastus"
   subscription-id: 615d1e7e-a44b-4606-a534-fdd1045ffa68
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
