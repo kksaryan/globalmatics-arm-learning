@@ -20,7 +20,7 @@ jobs:
       name: staging
     env:
       resource-group: rg-stg-kktest
-      location: eastus2
+      location: centralus
       domain: kksonistg
       storage: kksonistgstorage
 
@@ -82,7 +82,7 @@ jobs:
       name: production
     env:
       resource-group: rg-prod-kktest
-      location: eastus2
+      location: eastus
       domain: kksoniprod
       storage: kksoniprodstorage
 
