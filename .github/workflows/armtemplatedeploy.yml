@@ -55,8 +55,8 @@ jobs:
         with:
           scope: resourcegroup
           resourceGroupName: rg-githubactions
-          parameters: adminPassword=kksoni@198
+          parameters: adminPassword=${{ secrets.UBONTU_ADMIN_PASSWORD}}
             location="East US"
-            domainName=${{ secrets.UBONTU_ADMIN_PASSWORD}}
+            domainName=kksoni1988
           template: ./arm-templates/vm.json
           deploymentMode: Complete
