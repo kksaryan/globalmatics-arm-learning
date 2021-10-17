@@ -33,7 +33,7 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           inlineScript: |
-            az group delete --name ${{ env.resource-group }} --subscription ${{ env.subscription-id }}
+            az group delete --name ${{ env.resource-group }} --subscription ${{ env.subscription-id }} --yes -y
 
       - name: Getting Secrets from Key Vaults
         uses: Azure/get-keyvault-secrets@v1
@@ -65,13 +65,13 @@ jobs:
             location=${{ env.location }}
           template: ./arm-templates/storageaccount.json
 
-      - name: Create virtual machine
-        uses: azure/arm-deploy@v1
-        with:
-          scope: resourcegroup
-          resourceGroupName: ${{ env.resource-group }}
-          parameters:
-            adminPassword=${{ steps.myGetSecretAction.outputs.adminPassword }}
-            location=${{ env.location }}
-            domainName=kksoni1988
-          template: ./arm-templates/vm.json
+      # - name: Create virtual machine
+      #   uses: azure/arm-deploy@v1
+      #   with:
+      #     scope: resourcegroup
+      #     resourceGroupName: ${{ env.resource-group }}
+      #     parameters:
+      #       adminPassword=${{ steps.myGetSecretAction.outputs.adminPassword }}
+      #       location=${{ env.location }}
+      #       domainName=kksoni1988
+      #     template: ./arm-templates/vm.json
