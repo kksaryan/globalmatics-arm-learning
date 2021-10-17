@@ -8,16 +8,22 @@ on:
     branches:
       - main
 env:
-  resource-group: rg-kktest
-  location: eastus
   subscription-id: 615d1e7e-a44b-4606-a534-fdd1045ffa68
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  armDeploy:
-    # The type of runner that the job will run on
+  armDeployStaging:
+    name: Staging deployment
     runs-on: ubuntu-latest
+  environment:
+    name: staging
+
+  env:
+    resource-group: rg-stg-kktest
+    location: eastus2
+    domain: kksoni-stg
+    storage: kksoni-stg-storage
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -28,12 +34,6 @@ jobs:
         uses: Azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      # - name: Azure CLI Action to delete ${{ env.resource-group }}
-      #   uses: Azure/cli@1.0.4
-      #   with:
-      #     inlineScript: |
-      #       az group delete --name ${{ env.resource-group }} --subscription ${{ env.subscription-id }} --yes -y
 
       - name: Getting Secrets from Key Vaults
         uses: Azure/get-keyvault-secrets@v1
@@ -61,17 +61,81 @@ jobs:
           resourceGroupName: ${{ env.resource-group }}
           subscriptionId: ${{ env.subscription-id }}
           parameters: sku=Standard_LRS
-            storageAccountName=kksoni1982
+            storageAccountName=${{ env.storage }}
             location=${{ env.location }}
           template: ./arm-templates/storageaccount.json
 
-      # - name: Create virtual machine
-      #   uses: azure/arm-deploy@v1
-      #   with:
-      #     scope: resourcegroup
-      #     resourceGroupName: ${{ env.resource-group }}
-      #     parameters:
-      #       adminPassword=${{ steps.myGetSecretAction.outputs.adminPassword }}
-      #       location=${{ env.location }}
-      #       domainName=kksoni1988
-      #     template: ./arm-templates/vm.json
+      - name: Create virtual machine
+        uses: azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ env.resource-group }}
+          parameters: adminPassword=${{ secrets.UBONTU_ADMIN_PASSWORD }}
+            location=${{ env.location }}
+            domainName=${{ env.domain }}
+          template: ./arm-templates/vm.json
+  
+  armDeployProduction:
+    name: Production deployment
+    runs-on: ubuntu-latest
+
+  environment:
+    name: production
+
+  needs: armDeployStaging
+  env:
+    resource-group: rg-prod-kktest
+    location: eastus2
+    domain: kksoni-prod
+    storage: kksoni-prod-storage
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Getting Secrets from Key Vaults
+        uses: Azure/get-keyvault-secrets@v1
+        with:
+          keyvault: "abcKeyVaults"
+          secrets: "adminPassword"
+        id: myGetSecretAction
+
+      - name: Provision new resource group ${{ env.resource-group }}
+        uses: azure/arm-deploy@v1
+        with:
+          scope: subscription
+          subscriptionId: ${{ env.subscription-id }}
+          region: "Central India"
+          parameters: location=${{ env.location }}
+            resourceGroupName=${{ env.resource-group }}
+          template: ./arm-templates/resourcegroup.json
+          deploymentMode: Complete
+
+      - name: Create storage account
+        uses: azure/arm-deploy@v1
+        id: storageDeployed
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ env.resource-group }}
+          subscriptionId: ${{ env.subscription-id }}
+          parameters: sku=Standard_LRS
+            storageAccountName=${{ env.storage }}
+            location=${{ env.location }}
+          template: ./arm-templates/storageaccount.json
+
+      - name: Create virtual machine
+        uses: azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ env.resource-group }}
+          parameters: adminPassword=${{ secrets.UBONTU_ADMIN_PASSWORD }}
+            location=${{ env.location }}
+            domainName=${{ env.domain }}
+          template: ./arm-templates/vm.json
+
