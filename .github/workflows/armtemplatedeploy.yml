@@ -40,7 +40,7 @@ jobs:
         with:
           scope: subscription
           subscriptionId: 615d1e7e-a44b-4606-a534-fdd1045ffa68
-          region: "East US"
+          region: "Central India"
           parameters: location="East US"
             resourceGroupName=${{ env.resource-group }}
           template: ./arm-templates/resourcegroup.json
