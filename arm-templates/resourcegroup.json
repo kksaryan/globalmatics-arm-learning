@@ -6,16 +6,14 @@
             "type": "string",
             "metadata": {
                 "description": "Enter the location of rg"
-            },
-            "defaultValue":"Central India"
+            }
             
         },
         "resourceGroupName": {
             "type": "string",
             "metadata": {
                 "description": "Enter resource group name"
-            },
-            "defaultValue":"rg-githubactions"
+            }
         }
     },
     "functions": [],
