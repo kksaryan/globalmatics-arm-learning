@@ -1,0 +1,28 @@
+on: [push]
+
+env:
+  subscription-id: 615d1e7e-a44b-4606-a534-fdd1045ffa68
+  resource-group: rg-stg-kktest
+  location: centralus
+
+jobs:
+  deployResourceGroup:
+    name: Resource Group Deployment
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Provision new resource group
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ env.subscription-id }}
+          parameters: location=${{ env.location }}
+            resourceGroupName=${{ env.resource-group }}
+          template: ./bicep-templates/resourceGroup.bicep

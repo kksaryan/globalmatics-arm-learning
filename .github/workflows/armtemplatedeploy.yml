@@ -4,9 +4,10 @@ name: armTemplateDeploy
 
 # Controls when the workflow will run
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
+  workflow_dispatch
 env:
   subscription-id: 615d1e7e-a44b-4606-a534-fdd1045ffa68
 
