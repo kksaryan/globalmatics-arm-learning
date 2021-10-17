@@ -51,17 +51,18 @@ jobs:
       #     deploymentMode: Complete
       - name: Getting Secrets from Key Vaults
         uses: Azure/get-keyvault-secrets@v1
-          with:
-            keyvault: "abcKeyVaults"
-            secrets: 'adminPassword'
+        with:
+          keyvault: "abcKeyVaults"
+          secrets: "adminPassword"
         id: myGetSecretAction
-        
+
       - name: Create virtual machine
         uses: azure/arm-deploy@v1
         with:
           scope: resourcegroup
           resourceGroupName: rg-githubactions
-          parameters: adminPassword=${{ steps.myGetSecretAction.outputs.adminPassword }}
+          parameters:
+            adminPassword=${{ steps.myGetSecretAction.outputs.adminPassword }}
             location="East US"
             domainName=kksoni1988
           template: ./arm-templates/vm.json
