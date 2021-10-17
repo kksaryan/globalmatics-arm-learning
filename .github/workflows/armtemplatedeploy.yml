@@ -29,6 +29,11 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Azure CLI Action to delete ${{ env.resource-group }}
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: az group delete -n ${{ env.resource-group }}
+
       - name: Getting Secrets from Key Vaults
         uses: Azure/get-keyvault-secrets@v1
         with:
