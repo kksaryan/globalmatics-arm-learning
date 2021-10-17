@@ -23,7 +23,7 @@ jobs:
         uses: azure/arm-deploy@v1
         with:
           subscriptionId: ${{ env.subscription-id }}
-          resourceGroupName: ${{ env.resource-group }}
+          region: "Central India"
           parameters: location=${{ env.location }}
             resourceGroupName=${{ env.resource-group }}
           template: ./bicep-templates/resourceGroup.bicep
