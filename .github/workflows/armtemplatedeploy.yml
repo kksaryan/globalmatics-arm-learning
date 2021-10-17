@@ -8,8 +8,7 @@ on:
     branches:
       - main
 env:
-  resource-group: rg-githubaction
-  location: "eastus"
+  resource-group: rg-githubactions
   subscription-id: 615d1e7e-a44b-4606-a534-fdd1045ffa68
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -40,11 +39,11 @@ jobs:
         uses: azure/arm-deploy@v1
         with:
           scope: subscription
-          subscriptionId: ${{ env.subscription-id }}
-          region: ${{ env.location }}
-          parameters: location=${{ env.location }}
+          subscriptionId: 615d1e7e-a44b-4606-a534-fdd1045ffa68
+          parameters: location="East US"
             resourceGroupName=${{ env.resource-group }}
           template: ./arm-templates/resourcegroup.json
+          deploymentMode: Complete
 
       - name: Create storage account
         uses: azure/arm-deploy@v1
@@ -52,12 +51,12 @@ jobs:
         with:
           scope: resourcegroup
           resourceGroupName: ${{ env.resource-group }}
-          #subscriptionId: 615d1e7e-a44b-4606-a534-fdd1045ffa68
-          #region: Central India
+          subscriptionId: 615d1e7e-a44b-4606-a534-fdd1045ffa68
           parameters: sku=Standard_LRS
             storageAccountName=kksoni1982
-            location=${{ env.location }}
+            location="East US"
           template: ./arm-templates/storageaccount.json
+          deploymentMode: Complete
 
       - name: Create virtual machine
         uses: azure/arm-deploy@v1
@@ -66,7 +65,7 @@ jobs:
           resourceGroupName: ${{ env.resource-group }}
           parameters:
             adminPassword=${{ steps.myGetSecretAction.outputs.adminPassword }}
-            location=${{ env.location }}
+            location="East US"
             domainName=kksoni1988
           template: ./arm-templates/vm.json
           deploymentMode: Complete
