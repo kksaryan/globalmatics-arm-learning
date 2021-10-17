@@ -64,15 +64,15 @@ jobs:
             location=${{ env.location }}
           template: ./arm-templates/storageaccount.json
 
-      - name: Create virtual machine
-        uses: azure/arm-deploy@v1
-        with:
-          scope: resourcegroup
-          resourceGroupName: ${{ env.resource-group }}
-          parameters: adminPassword=${{ secrets.UBONTU_ADMIN_PASSWORD }}
-            location=${{ env.location }}
-            domainName=${{ env.domain }}
-          template: ./arm-templates/vm.json
+      # - name: Create virtual machine
+      #   uses: azure/arm-deploy@v1
+      #   with:
+      #     scope: resourcegroup
+      #     resourceGroupName: ${{ env.resource-group }}
+      #     parameters: adminPassword=${{ secrets.UBONTU_ADMIN_PASSWORD }}
+      #       location=${{ env.location }}
+      #       domainName=${{ env.domain }}
+      #     template: ./arm-templates/vm.json
 
   armDeployProduction:
     name: Production deployment
@@ -126,12 +126,12 @@ jobs:
             location=${{ env.location }}
           template: ./arm-templates/storageaccount.json
 
-      - name: Create virtual machine
-        uses: azure/arm-deploy@v1
-        with:
-          scope: resourcegroup
-          resourceGroupName: ${{ env.resource-group }}
-          parameters: adminPassword=${{ secrets.UBONTU_ADMIN_PASSWORD }}
-            location=${{ env.location }}
-            domainName=${{ env.domain }}
-          template: ./arm-templates/vm.json
+      # - name: Create virtual machine
+      #   uses: azure/arm-deploy@v1
+      #   with:
+      #     scope: resourcegroup
+      #     resourceGroupName: ${{ env.resource-group }}
+      #     parameters: adminPassword=${{ secrets.UBONTU_ADMIN_PASSWORD }}
+      #       location=${{ env.location }}
+      #       domainName=${{ env.domain }}
+      #     template: ./arm-templates/vm.json
