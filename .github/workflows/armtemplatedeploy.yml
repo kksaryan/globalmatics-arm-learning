@@ -57,5 +57,6 @@ jobs:
           resourceGroupName: rg-githubactions
           parameters: adminPassword=kksoni@198
             location="East US"
+            domainName="kksoni1981"
           template: ./arm-templates/vm.json
           deploymentMode: Complete

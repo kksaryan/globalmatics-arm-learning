@@ -13,6 +13,12 @@
             "metadata": {
                 "description": "Please enter location of VM"
             }
+        },
+        "domainName": {
+            "type": "string",
+            "metadata": {
+                "description": "Please provide name of VM"
+            }
         }
     },
     "functions": [],
@@ -29,7 +35,7 @@
             "properties": {
                 "publicIPAllocationMethod": "Dynamic",
                 "dnsSettings": {
-                    "domainNameLabel": "[toLower('ubuntuVM1')]"
+                    "domainNameLabel": "[toLower(parameters('domainName'))]"
                 }
             }
         },
