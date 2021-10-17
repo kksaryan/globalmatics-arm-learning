@@ -21,8 +21,8 @@ jobs:
     env:
       resource-group: rg-stg-kktest
       location: eastus2
-      domain: kksoni-stg
-      storage: kksoni-stg-storage
+      domain: kksonistg
+      storage: kksonistgstorage
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -83,8 +83,8 @@ jobs:
     env:
       resource-group: rg-prod-kktest
       location: eastus2
-      domain: kksoni-prod
-      storage: kksoni-prod-storage
+      domain: kksoniprod
+      storage: kksoniprodstorage
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
