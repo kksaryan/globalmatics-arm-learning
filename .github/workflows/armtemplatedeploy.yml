@@ -8,7 +8,7 @@ on:
     branches:
       - main
 env:
-  resource-group: rg-githubactions
+  resource-group: rg-githubaction
   location: "eastus"
   subscription-id: 615d1e7e-a44b-4606-a534-fdd1045ffa68
 
