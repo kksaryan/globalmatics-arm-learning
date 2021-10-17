@@ -25,6 +25,15 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Getting Secrets from Key Vaults
+        uses: Azure/get-keyvault-secrets@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: GitHubActions
+          keyvault: "abcKeyVaults"
+          secrets: "adminPassword"
+        id: myGetSecretAction
+
       - name: Provision new resource group
         uses: azure/arm-deploy@v1
         with:
@@ -49,14 +58,6 @@ jobs:
       #       location="West India"
       #     template: ./arm-templates/storageaccount.json
       #     deploymentMode: Complete
-      - name: Getting Secrets from Key Vaults
-        uses: Azure/get-keyvault-secrets@v1
-        with:
-          scope: resourcegroup
-          resourceGroupName: GitHubActions
-          keyvault: "abcKeyVaults"
-          secrets: "adminPassword"
-        id: myGetSecretAction
 
       - name: Create virtual machine
         uses: azure/arm-deploy@v1
